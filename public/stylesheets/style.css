@@ -1,0 +1,21 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: 25% 25% 50%;
+}
+
+.section1{
+  background: crimson;
+}
+
+.section2{
+  background: #00B7FF
+}
