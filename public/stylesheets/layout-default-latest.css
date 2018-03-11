@@ -222,3 +222,32 @@ iframe.ui-layout-mask {}	/* extra mask for objects/applets */
 		overflow:	visible !important;
 	}
 }
+
+
+
+
+
+
+
+/*ADDED THIS FOR SEARCH BOX FORMATTING*/
+
+#search{
+
+	position: absolute;
+	left: 25%;
+
+}
+
+
+#search_input{
+
+	width: 45vw;
+
+}
+
+
+::-webkit-input-placeholder
+{
+
+	text-align: center;
+}

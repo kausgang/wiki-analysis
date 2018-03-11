@@ -26,10 +26,16 @@
 
 <!-- manually attach allowOverflow method to pane -->
 <div class="ui-layout-north" >
-    This is the north pane, closable, slidable and resizable
 
+    <div id="search">
+
+        <input type="search" placeholder="Search Wikipedia article here" id="search_input">
+        <input type="button" value="Search" id="search_button" onclick="search_wiki()">
+
+    </div>
 
 </div>
+
 
 <!-- allowOverflow auto-attached by option: west__showOverflowOnHover = true -->
 <div class="ui-layout-west">
