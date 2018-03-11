@@ -251,3 +251,15 @@ iframe.ui-layout-mask {}	/* extra mask for objects/applets */
 
 	text-align: center;
 }
+
+#search_button{
+
+	background-color: dodgerblue;
+	color: white;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+p{
+
+	font-size: smaller;
+}

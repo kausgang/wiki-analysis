@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         //	some resizing/toggling settings
         // , north__slidable: false	// OVERRIDE the pane-default of 'slidable=true'
-
+        //
         // , north__togglerLength_closed: '100%'	// toggle-button is full-width of resizer-bar
         // , north__spacing_closed: 20		// big resizer-bar when open (zero height)
         // , south__resizable: true	// OVERRIDE the pane-default of 'resizable=true'
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
 
         //	enable showOverflow on west-pane so CSS popups will overlap north pane
-        , west__showOverflowOnHover: true
+        // , west__showOverflowOnHover: true
 
         //	enable state management
         , stateManagement__enabled: true // automatic cookie load & save enabled by default
@@ -71,32 +71,7 @@ $(document).ready(function () {
 
 
 
-    //if url is clicked on west pane
-    $(".url1").click(function (e) {
 
-      //PREVENT URL FROM LOADING
-    e.preventDefault();
-
-        ///LOAD PAGE IN CENTER PANE
-    var value = $(this).attr("href");
-    $("#level_0_center").html('<object width="100%"  height="100%" data="https://en.wikipedia.org/wiki/India"/ >');
-
-
-
-
-    // ALSO SHOW THE WEBPAGE IN LEVEL1_CENTER FOR TESTING
-
-        $.get('/testing',function (data) {
-
-            $("#level_1_center").html(data);
-        })
-
-
-
-
-
-
-});
 
 
 
@@ -142,11 +117,99 @@ function search_wiki() {
     $('#search_input').val('');
 
 
+    //
+    // //FOR TESTING PURPOSE
+    // $.get('/testing',function (data) {
+    //
+    //     $("#level_1_center").html(data);
+    // });
 
-    //FOR TESTING PURPOSE
-    $.get('/testing',function (data) {
 
-        $("#level_1_center").html(data);
+    var url =   "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
+                search_string +
+                "&formal=json&callback=?" ;
+
+console.log(url);
+
+    //clearout previous search result
+    $('#search_result').html('');
+
+
+    $.ajax({
+
+        type:"GET",
+        url:url,
+        // async:true,
+        dataType:"json",
+        success: function(data){
+
+            
+
+            //if no search result is returned
+            if(data[1].length == 0){
+
+                $("#search_result").html("no data found");
+            }
+
+            for(var i=0;i<data[1].length;i++){
+
+                var result_url = data[3][i];
+
+                $("#search_result").append(
+                  "<li><a class = 'url1' href= " + data[3][i] + ">" +
+                  data[1][i] +
+                    "</a>"
+
+                    // +"<p></p>"
+                    // +"</li>"
+
+                  + "</a><p>"+
+                  data[2][i]+
+                  "</p></li>"
+
+                );
+
+            }
+
+
+            //if url is clicked on west pane
+            $(".url1").click(function (e) {
+
+                //PREVENT URL FROM LOADING
+                e.preventDefault();
+
+                ///LOAD PAGE IN CENTER PANE
+                var value = $(this).attr("href");
+
+
+                $("#level_0_center").html('<object width="100%"  height="100%" data=' +value+ '>');
+
+
+
+
+                // ALSO SHOW THE WEBPAGE IN LEVEL1_CENTER FOR TESTING
+
+                $.get('/testing',function (data) {
+
+                    $("#level_1_center").html(data);
+                })
+
+
+
+
+
+
+            });
+
+
+
+        },
+        error: function(error) {
+
+            alert(error);
+        }
     });
+
+
 
 }
