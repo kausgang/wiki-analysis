@@ -8,6 +8,13 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+
+
+
+var testing = require('./routes/testing');
+
+
+
 var app = express();
 
 // view engine setup
@@ -30,10 +37,17 @@ app.use('/', index);
 app.use('/users', users);
 
 
-app.get('/testing', function(req, res){
-    res.send("WHEEE");
-    console.log("wwww");
-});
+
+
+
+app.use('/testing',testing);
+
+
+
+// app.get('/testing', function(req, res){
+//     res.send("WHEEE");
+//     console.log("wwww");
+// });
 
 
 
@@ -56,4 +70,19 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
+
+
+
+
+
+
+
+
+
 module.exports = app;
+
+
+
+
