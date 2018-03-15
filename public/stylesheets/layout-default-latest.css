@@ -233,8 +233,9 @@ iframe.ui-layout-mask {}	/* extra mask for objects/applets */
 
 #search{
 
-	position: absolute;
-	left: 25%;
+	/*position: absolute;*/
+	padding-left: 25vw;
+	/*left: 25%;*/
 
 }
 

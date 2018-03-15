@@ -11,7 +11,7 @@ var users = require('./routes/users');
 
 
 
-var testing = require('./routes/testing');
+var get_toc_data = require('./routes/get_toc_data');
 
 
 
@@ -40,7 +40,7 @@ app.use('/users', users);
 
 
 
-app.use('/testing',testing);
+app.use('/get_toc_data',get_toc_data);
 
 
 

@@ -43,6 +43,7 @@ $(document).ready(function () {
 
 
 
+
         //	enable showOverflow on west-pane so CSS popups will overlap north pane
         // , west__showOverflowOnHover: true
 
@@ -117,17 +118,12 @@ function search_wiki() {
     $('#search_input').val('');
 
 
-    //
-    // //FOR TESTING PURPOSE
-    // $.get('/testing',function (data) {
-    //
-    //     $("#level_1_center").html(data);
-    // });
 
 
     var url =   "https://en.wikipedia.org/w/api.php?action=opensearch&search=" +
                 search_string +
                 "&formal=json&callback=?" ;
+
 
 console.log(url);
 
@@ -143,7 +139,7 @@ console.log(url);
         dataType:"json",
         success: function(data){
 
-            
+
 
             //if no search result is returned
             if(data[1].length == 0){
@@ -189,9 +185,16 @@ console.log(url);
 
                 // ALSO SHOW THE WEBPAGE IN LEVEL1_CENTER FOR TESTING
 
-                $.get('/testing',function (data) {
+                var parameter = { url: value };
+                $.get('/get_toc_data',parameter,function (data) {
 
-                    $("#level_1_center").html(data);
+
+                    //// a static html page will be loaded. that static page will use the dynamic json data created by get_toc_data.js
+                    $("#level_1_center").html('<object width="100%"  height="100%" data=\"/D3/d3.html\">');
+                    // console.log(data);
+
+                    //call d3
+                    // display_d3(data);
                 })
 
 
@@ -213,3 +216,6 @@ console.log(url);
 
 
 }
+
+
+
