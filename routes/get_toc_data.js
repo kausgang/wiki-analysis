@@ -130,7 +130,7 @@ function get_toc(url,res) {
             count = 0
         }
 
-        console.log(final_toc);
+        // console.log(final_toc);
 
 
 
@@ -161,13 +161,19 @@ function get_toc(url,res) {
 
         // fs.writeFileSync('data.json', JSON.stringify(data, null, 2) , 'utf-8');
         //save the data.json file in public/D3 folder
-        var filename = path.join(__dirname,'../public/D3/data.json');
+
+
+        // console.log(__dirname);
+        var filename = path.join(__dirname,'../public/data.json');
+
         //write the json file for wikipedia toc
         fs.writeFileSync(filename, JSON.stringify(data, null, 2) , 'utf-8');
 
         //send an empty string as I'll not be using the response from this function.
         // a static html page will be loaded. that static page will use the dynamic json data
-        res.send('');
+
+        // res.send('');
+        res.render('d3');
 
 
 

@@ -190,11 +190,14 @@ console.log(url);
 
 
                     //// a static html page will be loaded. that static page will use the dynamic json data created by get_toc_data.js
-                    $("#level_1_center").html('<object width="100%"  height="100%" data=\"/D3/d3.html\">');
+                    // $("#level_1_center").html('<object width="100%"  height="100%" data=\"/D3/d3.html\">');
+
                     // console.log(data);
 
-                    //call d3
-                    // display_d3(data);
+                    // $("#level_1_center").html('<object width="100%"  height="100%" data=\"/D3/d3.html\">');
+                    $("#level_1_center").html(data);
+
+                    
                 })
 
 
