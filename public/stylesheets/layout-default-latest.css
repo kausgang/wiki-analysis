@@ -264,3 +264,17 @@ p{
 
 	font-size: smaller;
 }
+
+#level_1_south{
+
+	font-size: smaller;
+	font-weight: bold;
+	color: blue;
+}
+
+
+.section_display_error{
+
+	color: red;
+	font-weight: bold;
+}

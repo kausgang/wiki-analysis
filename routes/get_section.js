@@ -67,15 +67,15 @@ function get_section(url,section_number,res) {
     // console.log(url);
 
 //check if folder with title name exists
-    fs.exists(title, function (exists) {
-
-        if (exists) {
-            // console.log(exists)
-        }
-        else {
-            fs.mkdir(title)
-        }
-    });
+//     fs.exists(title, function (exists) {
+//
+//         if (exists) {
+//             // console.log(exists)
+//         }
+//         else {
+//             fs.mkdir(title)
+//         }
+//     });
 
     function download_img(img_url,img_filename){
 
@@ -96,18 +96,19 @@ function get_section(url,section_number,res) {
             var link_html = $(this).html();
             $(this).replaceWith(link_html);
         });
+
         // Remove references next to links
         $('sup').remove();
-        //REMOVE ALL THE REFERENCE AT THE END OF PAGE
-        //METHOD 1 .. SEARCH ALL CITE_NOTE_**** ID ELEMENTS & REMOVE THEM
-        //EXAMPLE
-        // <ol class="references">
-        //      <li id="cite_note-FOOTNOTEPetragliaAllchin20076-1"><span class="mw-cite-backlink"><b>^</b></span> <span class="reference-text">Petraglia, Allchin &amp; 2007, p.&#xA0;6.</span></li>
-        //      <li id="cite_note-FOOTNOTESingh2009545-28"><span class="mw-cite-backlink">^   </span> <span class="reference-text">Singh 2009, p.&#xA0;545.</span></li>
-        //     <li id="cite_note-FOOTNOTEStein199898&#x2013;99-29"><span class="mw-cite-backlink"><b>^</b></span> <span class="reference-text">Stein 1998, pp.&#xA0;98&#x2013;99.</span></li>
-        // </ol>
-        //USE WILDCARD
-        //$('[id^=cite_note]').remove();
+            //REMOVE ALL THE REFERENCE AT THE END OF PAGE
+            //METHOD 1 .. SEARCH ALL CITE_NOTE_**** ID ELEMENTS & REMOVE THEM
+            //EXAMPLE
+            // <ol class="references">
+            //      <li id="cite_note-FOOTNOTEPetragliaAllchin20076-1"><span class="mw-cite-backlink"><b>^</b></span> <span class="reference-text">Petraglia, Allchin &amp; 2007, p.&#xA0;6.</span></li>
+            //      <li id="cite_note-FOOTNOTESingh2009545-28"><span class="mw-cite-backlink">^   </span> <span class="reference-text">Singh 2009, p.&#xA0;545.</span></li>
+            //     <li id="cite_note-FOOTNOTEStein199898&#x2013;99-29"><span class="mw-cite-backlink"><b>^</b></span> <span class="reference-text">Stein 1998, pp.&#xA0;98&#x2013;99.</span></li>
+            // </ol>
+            //USE WILDCARD
+            //$('[id^=cite_note]').remove();
 
         //METHOD 2
         $('.references').remove();
@@ -137,36 +138,60 @@ function get_section(url,section_number,res) {
 //REQUEST VIA HTTP GET
     request.get(url, function(err,responsecode,body) {
 
+
+        if(err)throw err;
+
+
+
+
+
+
         //PARSE THE DATA INTO JSON OBJECT .. AS JSON OBJECT IS RETURNED BY WIKIPEDIA
         body = JSON.parse(body);
 
-        //because of the structure of the json object...the main data is held inside parse => test => *
-        var key = body.parse.text;
-        var $ = cheerio.load(key['*']);
 
-        //DISABLE FORMATTING
-        // $ = section_data_manipulation($);
+        console.log(body);
 
-        //read the file completely before moving on to write it
-        // var js_content = fs.readFileSync('jquery.js');
+        //IF SECTIONING IS NOT DONE PROPERLY FOR THE MAIN WIKIPEDIA PAGE
+        // FOR EXAMPLE https://en.wikipedia.org/wiki/St_Peter%27s_Basilica
+        if('error' in body){
 
-        //append content
-        var html_data = $.html();
+            var section_error = "This wikipedia page doesn't allow section display<p class='section_display_error' color='red'>Wikipedia errorcode:- "+body.error.code
+            res.send(section_error);
 
-        /*
-        var final_content = html_data+"\n"+js_content.toString();
+        }
+        else{
 
-        //write content into file
-        var path_seperator = path.sep;
-        filename = title + path_seperator + "section_" + section + ".html";
-        fs.writeFile(filename,final_content,function (err) {
-            console.log(err);
-        });
-*/
-        //console.log(final_content);
+            //because of the structure of the json object...the main data is held inside parse => test => *
+            var key = body.parse.text;
+            var $ = cheerio.load(key['*']);
+
+            //DISABLE FORMATTING (if needed) by commenting out below line
+            $ = section_data_manipulation($);
+
+            //read the file completely before moving on to write it
+            // var js_content = fs.readFileSync('jquery.js');
+
+            //append content
+            var html_data = $.html();
+
+            /*
+            var final_content = html_data+"\n"+js_content.toString();
+
+            //write content into file
+            var path_seperator = path.sep;
+            filename = title + path_seperator + "section_" + section + ".html";
+            fs.writeFile(filename,final_content,function (err) {
+                console.log(err);
+            });
+    */
+            //console.log(final_content);
 
 
-        res.send(html_data);
+            res.send(html_data);
+        }
+
+
 
     });
 

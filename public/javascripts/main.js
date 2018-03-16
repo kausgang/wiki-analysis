@@ -35,7 +35,8 @@ $(document).ready(function () {
 
 
         , east__maxSize: .5 // 50% of layout width
-        , center__minHeight:				200
+        // , center__minHeight:				200
+
 
 
 
@@ -64,7 +65,8 @@ $(document).ready(function () {
 
 
         /////ADDED THIS TO HOLD INITIAL SIZE....
-        south__size: 250
+        // south__size: 250
+        // center__minHeight:				500
 
 
 
@@ -208,7 +210,8 @@ console.log(url);
 
 
 
-
+                //also show in url pane
+                $('#level_1_south').html(value);
 
 
             });
