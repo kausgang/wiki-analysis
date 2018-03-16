@@ -137,12 +137,20 @@ function get_toc(url,res) {
         //format the final_toc object in a string & write it to a json file
         var data = {
 
+            // save the url
+            url: url,
             nodes:[],
             links:[]
         };
 
+
+
+
         //create root node
-        data.nodes[0] = { section_number: -1 };
+        data.nodes[0] = {
+            section_number: -1,
+            section_header: 'root'
+        };
 
         for(var i = 0; i < final_toc.length ; i++){
 

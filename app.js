@@ -12,6 +12,7 @@ var users = require('./routes/users');
 
 
 var get_toc_data = require('./routes/get_toc_data');
+var get_section = require('./routes/get_section');
 
 
 
@@ -43,6 +44,7 @@ app.use('/users', users);
 
 
 app.use('/get_toc_data',get_toc_data);
+app.use('/get_section',get_section);
 
 
 

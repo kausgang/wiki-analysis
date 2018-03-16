@@ -197,7 +197,13 @@ console.log(url);
                     // $("#level_1_center").html('<object width="100%"  height="100%" data=\"/D3/d3.html\">');
                     $("#level_1_center").html(data);
 
-                    
+                    //have control over the east center pane
+                    // $("#level_1_center").click(function () {
+                    //
+                    //     alert('help');
+                    //
+                    // });
+
                 })
 
 
