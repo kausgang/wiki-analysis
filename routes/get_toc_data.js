@@ -8,22 +8,14 @@ var express = require('express');
 var router = express.Router();
 
 
-
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
     // res.send('respond with a resource');
 
-
     var url = req.query.url;
 
     get_toc(url,res);
-
-
-
-
-    // res.render('testing');
 
 });
 
@@ -35,8 +27,6 @@ function get_toc(url,res) {
         var section_header;
         var parent_section_number;
     }
-
-
 
     request.get(url, function (err, res_code, body) {
 
@@ -132,8 +122,6 @@ function get_toc(url,res) {
 
         // console.log(final_toc);
 
-
-
         //format the final_toc object in a string & write it to a json file
         var data = {
 
@@ -143,15 +131,13 @@ function get_toc(url,res) {
             links:[]
         };
 
-
-
-
         //create root node
         data.nodes[0] = {
             section_number: -1,
             section_header: 'root'
         };
 
+        //create the data structure to support d3 force diagram
         for(var i = 0; i < final_toc.length ; i++){
 
             data.nodes[i+1] = {
@@ -167,18 +153,13 @@ function get_toc(url,res) {
 
         // console.log(data)
 
-        // fs.writeFileSync('data.json', JSON.stringify(data, null, 2) , 'utf-8');
         //save the data.json file in public/D3 folder
-
 
         // console.log(__dirname);
         var filename = path.join(__dirname,'../public/data.json');
 
         //write the json file for wikipedia toc
         fs.writeFileSync(filename, JSON.stringify(data, null, 2) , 'utf-8');
-
-        //send an empty string as I'll not be using the response from this function.
-        // a static html page will be loaded. that static page will use the dynamic json data
 
         // res.send('');
         res.render('d3');
@@ -189,12 +170,5 @@ function get_toc(url,res) {
 
 
 }
-
-
-
-
-
-
-
 
 module.exports = router;

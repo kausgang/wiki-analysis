@@ -8,12 +8,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-
-
-
 var get_toc_data = require('./routes/get_toc_data');
 var get_section = require('./routes/get_section');
-
 
 
 var app = express();
@@ -30,18 +26,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// console.log(__dirname);
-
-
-
-
 
 app.use('/', index);
 app.use('/users', users);
-
-
-
-
 
 app.use('/get_toc_data',get_toc_data);
 app.use('/get_section',get_section);

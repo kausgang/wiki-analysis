@@ -232,49 +232,30 @@ iframe.ui-layout-mask {}	/* extra mask for objects/applets */
 /*ADDED THIS FOR SEARCH BOX FORMATTING*/
 
 #search{
-
-	/*position: absolute;*/
 	padding-left: 25vw;
-	/*left: 25%;*/
-
 }
-
-
 #search_input{
-
 	width: 45vw;
-
 }
-
-
 ::-webkit-input-placeholder
 {
-
 	text-align: center;
 }
-
 #search_button{
-
 	background-color: dodgerblue;
 	color: white;
 	padding-left: 30px;
 	padding-right: 30px;
 }
 p{
-
 	font-size: smaller;
 }
-
 #level_1_south{
-
 	font-size: smaller;
 	font-weight: bold;
 	color: blue;
 }
-
-
 .section_display_error{
-
 	color: red;
 	font-weight: bold;
 }

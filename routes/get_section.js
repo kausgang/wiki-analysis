@@ -4,28 +4,19 @@ var cheerio = require('cheerio');
 var https = require('https');
 var path = require('path');
 
-
-
 var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
-
     var url = req.query.url;
     var section_number = req.query.section_number;
 
     get_section(url,section_number,res);
 
-
-
-
     // res.send('respond with a resource');
 });
-
-
-
 
 function get_section(url,section_number,res) {
 
@@ -141,11 +132,6 @@ function get_section(url,section_number,res) {
 
         if(err)throw err;
 
-
-
-
-
-
         //PARSE THE DATA INTO JSON OBJECT .. AS JSON OBJECT IS RETURNED BY WIKIPEDIA
         body = JSON.parse(body);
 
@@ -198,7 +184,5 @@ function get_section(url,section_number,res) {
 
 
 }
-
-
 
 module.exports = router;
